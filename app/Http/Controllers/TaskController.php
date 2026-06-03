@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    // GET /tasks - show all tasks
+    //  show all tasks
     public function index()
     {
         $tasks = Auth::user()->tasks()->latest()->paginate(10);
         return view('tasks.index', compact('tasks'));
     }
 
-    // GET /tasks/create - show create form
+    //  show create form
     public function create()
     {
         return view('tasks.create');
     }
 
-    // POST /tasks - save new task
+    // save new task
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,14 +38,14 @@ class TaskController extends Controller
                          ->with('success', 'Task created!');
     }
 
-    // GET /tasks/{task}/edit - show edit form
+    // show edit form
     public function edit(Task $task)
     {
         abort_if($task->user_id !== Auth::id(), 403);
         return view('tasks.edit', compact('task'));
     }
 
-    // PUT /tasks/{task} - update task
+    //  update task
     public function update(Request $request, Task $task)
     {
         abort_if($task->user_id !== Auth::id(), 403);
@@ -63,7 +63,7 @@ class TaskController extends Controller
                          ->with('success', 'Task updated!');
     }
 
-    // DELETE /tasks/{task} - delete task
+    //  delete task
     public function destroy(Task $task)
     {
         abort_if($task->user_id !== Auth::id(), 403);
@@ -73,7 +73,7 @@ class TaskController extends Controller
                          ->with('success', 'Task deleted!');
     }
 
-    // PATCH /tasks/{task}/toggle - switch status
+    // switch status
     public function toggle(Task $task)
     {
         abort_if($task->user_id !== Auth::id(), 403);
