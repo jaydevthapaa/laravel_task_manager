@@ -31,3 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/tasks/{task}',       [TaskController::class, 'destroy'])->name('tasks.destroy');
     Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])->name('tasks.toggle');
 });
+
+Route::get('/test', function () {
+    return 'Laravel is working';
+});
