@@ -16,7 +16,6 @@ RUN docker-php-ext-install \
     pdo \
     pdo_mysql \
     pdo_sqlite \
-    sqlite3 \
     mbstring \
     exif \
     pcntl \
@@ -46,7 +45,7 @@ RUN php artisan config:clear || true
 RUN php artisan cache:clear || true
 
 # Run migrations
-RUN php artisan migrate --force || true
+# RUN php artisan migrate --force || true
 
 # Expose Render port
 EXPOSE 10000
